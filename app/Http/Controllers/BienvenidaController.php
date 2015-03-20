@@ -1,6 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php namespace GestorImagenes\Http\Controllers;
 
-class WelcomeController extends Controller {
+class BienvenidaController extends Controller {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,9 +28,14 @@ class WelcomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function getIndex()
 	{
-		return view('welcome');
+		return 'bienvenida a la aplicacion';
+	}
+
+	public function missingMethod($parameters = array())
+	{
+		abort(404);
 	}
 
 }
