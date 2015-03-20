@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: GestorImagenes
+        psr4_prefix: GestorImagenes
+        src_path: app
