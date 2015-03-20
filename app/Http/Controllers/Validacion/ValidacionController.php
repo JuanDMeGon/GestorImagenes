@@ -89,7 +89,7 @@ class ValidacionController extends Controller
 
 	public function loginPath()
 	{
-		return property_exists($this, 'loginPath') ? $this->loginPath : '/validacion/iniciar';
+		return property_exists($this, 'loginPath') ? $this->loginPath : '/validacion/inicio';
 	}
 
 	public function getRecuperar()
