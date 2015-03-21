@@ -18,6 +18,13 @@
 						</div>
 					@endif
 
+					@if (Session::has('csrf'))
+						<div class="alert alert-danger">
+							<strong>Whoops!</strong> Al parecer algo está mal<br><br>
+							{{Session::get('csrf')}}
+						</div>
+					@endif
+
 					<form class="form-horizontal" role="form" method="POST" action="{{ url('/validacion/inicio') }}">
 						<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
