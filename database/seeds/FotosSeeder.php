@@ -17,16 +17,17 @@ class FotosSeeder extends Seeder {
 	public function run()
 	{
 		$albumes = Album::all();
-
+		$contador = 0;
 		foreach ($albumes as $album)
 		{
-			$cantidad = rand(0, 5);
+			$cantidad = mt_rand(0, 5);
 			for ($i=0; $i < $cantidad; $i++)
 			{
+				$contador++;
 				Foto::create(
 				[
-					'nombre' => "Nombre album$i",
-					'descripcion' => "Descripcion album $i",
+					'nombre' => "Nombre foto$contador",
+					'descripcion' => "Descripcion foto $contador",
 					'ruta' => '/img/text.png',
 					'album_id' => $album->id
 				]);
