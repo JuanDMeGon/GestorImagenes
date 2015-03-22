@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 
+use GestorImagenes\Http\Requests\IniciarSesionRequest;
+
 class ValidacionController extends Controller 
 {
 	protected $auth;
@@ -46,12 +48,8 @@ class ValidacionController extends Controller
 		return view('validacion.inicio');
 	}
 
-	public function postInicio(Request $request)
+	public function postInicio(IniciarSesionRequest $request)
 	{
-		$this->validate($request, [
-			'email' => 'required|email', 'password' => 'required',
-		]);
-
 		$credentials = $request->only('email', 'password');
 
 		if ($this->auth->attempt($credentials, $request->has('remember')))
