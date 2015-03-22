@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'model' => 'GestorImagenes\User',
+	'model' => 'GestorImagenes\Usuario',
 
 	/*
 	|--------------------------------------------------------------------------

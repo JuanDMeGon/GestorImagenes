@@ -14,7 +14,7 @@
 				<div class="panel-heading">Inicio</div>
 
 				<div class="panel-body">
-					Bienvenido (Usuario)
+					Bienvenido {{Auth::user()->nombre}}
 				</div>
 			</div>
 		</div>
