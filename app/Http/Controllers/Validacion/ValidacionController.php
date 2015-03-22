@@ -7,6 +7,9 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 
 use GestorImagenes\Http\Requests\IniciarSesionRequest;
+use GestorImagenes\Http\Requests\RecuperarContrasenaRequest;
+
+use GestorImagenes\Usuario;
 
 class ValidacionController extends Controller 
 {
@@ -96,9 +99,28 @@ class ValidacionController extends Controller
 		return view('validacion.recuperar');
 	}
 
-	public function postRecuperar()
+	public function postRecuperar(RecuperarContrasenaRequest $request)
 	{
-		return 'recuperando contraseña';
+		$pregunta = $request->get('pregunta');
+		$respuesta = $request->get('respuesta');
+
+		$email = $request->get('email');
+
+		$usuario = Usuario::where('email', '=', $email)->first();
+
+		if($pregunta === $usuario->pregunta && $respuesta === $usuario->respuesta)
+		{
+			$contrasena = $request->get('password');
+			$usuario->password = bcrypt($contrasena);
+
+			$usuario->save();
+
+			return redirect('/validacion/inicio')->with(['recuperada' => 'La contarseña se cambió. Inicia sesión']);
+
+		}
+
+		return redirect('/validacion/recuperar')->withInput($request->only('email', 'pregunta'))
+		->withErrors(['pregunta' => 'La pregunta y/o respuesta ingresadas no coinciden.']);
 	}
 
 	public function missingMethod($parameters = array())
