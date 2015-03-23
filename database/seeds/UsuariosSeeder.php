@@ -20,7 +20,7 @@ class UsuariosSeeder extends Seeder {
 		{
 			Usuario::create(
 			[
-				'nombre' => "usuario$1",
+				'nombre' => "usuario$i",
 				'email' => "email$i@test.com",
 				'password' => bcrypt("pass$i"),
 				'pregunta' => "preg$i",

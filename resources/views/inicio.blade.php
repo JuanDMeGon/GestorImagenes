@@ -10,7 +10,7 @@
 
 @if (Session::has('actualizado'))
 	<div class="alert alert-success">
-		<strong>Whoops!</strong> Al parecer algo está mal<br><br>
+		<strong>Genial!</strong><br><br>
 		{{Session::get('actualizado')}}
 	</div>
 @endif
