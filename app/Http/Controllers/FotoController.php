@@ -2,6 +2,7 @@
 
 use GestorImagenes\Http\Requests\MostrarFotosRequest;
 use GestorImagenes\Http\Requests\CrearFotoRequest;
+use GestorImagenes\Http\Requests\ActualizarFotoRequest;
 
 use Illuminate\Http\Request;
 
@@ -55,14 +56,40 @@ class FotoController extends Controller
 		return redirect("/validado/fotos?id=$id")->with('creada', 'La foto ha sido subida');
 	}
 
-	public function getActualizarFoto()
+	public function getActualizarFoto($id)
 	{
-		return 'formulario de actualizar fotos';
+		$foto = Foto::find($id);
+		return view('fotos.actualizar-foto', ['foto' => $foto]);
 	}
 
-	public function postActualizarFoto()
+	public function postActualizarFoto(ActualizarFotoRequest $request)
 	{
-		return 'actualizar foto';
+		$foto = Foto::find($request->get('id'));
+
+		$foto->nombre = $request->get('nombre');
+		$foto->descripcion = $request->get('descripcion');
+
+		if($request->hasFile('imagen'))
+		{
+			$imagen = $request->file('imagen');
+			$ruta = '/img/';
+			$nombre = sha1(Carbon::now()).'.'.$imagen->guessExtension();
+
+			$imagen->move(getcwd().$ruta, $nombre);
+
+			$rutaanterior = getcwd().$foto->ruta;
+
+			if(file_exists($rutaanterior))
+			{
+				unlink(realpath($rutaanterior));
+			}
+
+			$foto->ruta = $ruta.$nombre;
+		}
+
+		$foto->save();
+
+		return redirect("/validado/fotos?id=$foto->album_id")->with('editada', 'la foto fue editada');
 	}
 
 	public function getEliminarFoto()
