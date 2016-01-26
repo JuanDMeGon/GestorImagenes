@@ -20,7 +20,7 @@ class CrearTablaFotos extends Migration {
 			$table->string('ruta');
 			$table->integer('album_id')->unsigned();
 			$table->foreign('album_id')->references('id')->on('albumes');
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

@@ -19,7 +19,7 @@ class CrearTablaAlbumes extends Migration {
 			$table->string('descripcion');
 			$table->integer('usuario_id')->unsigned();
 			$table->foreign('usuario_id')->references('id')->on('usuarios');
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 
